@@ -29,83 +29,99 @@ void mergeInsertionSort(int arr[], int l, int r);
 
 int main()
 {
-//TODO
-return 0;
+    // TODO
+    return 0;
 }
 void arrayCopy(int original[], int copy[], int size)
 {
-//TODO
+    for (int i = 0; i < size; i++)
+    {
+        copy[i] = original[i];
+    }
 }
 void randArray(int arr[], int size, int maxValue)
 {
-//TODO
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] = rand() % maxValue + 1;
+    }
 }
 // given in pdf
 long timediff(clock_t t1, clock_t t2)
 {
-//calculate the elapsed time of the passed clock_t variables using the formula
-below and return the value
-long elapsed = ((double) t2-t1) / CLOCKS_PER_SEC * 1000;
-return elapsed;
+    // calculate the elapsed time of the passed clock_t variables using the formula below and return the value
+    long elapsed = ((double)t2 - t1) / CLOCKS_PER_SEC * 1000;
+    return elapsed;
 }
 void swap(int *xp, int *yp)
 {
-//swap the passed integers using pass by reference
-int temp = *xp;
-*xp = *yp;
-*yp = temp;
+    // swap the passed integers using pass by reference
+    int temp = *xp;
+    *xp = *yp;
+    *yp = temp;
 }
 void bubbleSort(int arr[], int n)
 {
-int i, j,temp;
-for (i = 0; i < n - 1; i++)
-{
-for (j = 0; j < n - i - 1; j++)
-{
-if (arr[j] > arr[j + 1])
-{
-swap(&arr[j], &arr[j+1]);
-}
-}
-}
+    int i, j, temp;
+    for (i = 0; i < n - 1; i++)
+    {
+        for (j = 0; j < n - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                swap(&arr[j], &arr[j + 1]);
+            }
+        }
+    }
 }
 void insertionSort(int arr[], int l, int r)
 {
-int i, item, j;
-for (i = l + 1; i <= r; i++)
-{
-item = arr[i];
-for(j= i - 1; j >= l; j--)
-{
-if(arr[j]>item)
-arr[j + 1] = arr[j];
-else
-break;
-}
-arr[j + 1] = item;
-}
+    int i, item, j;
+    for (i = l + 1; i <= r; i++)
+    {
+        item = arr[i];
+        for (j = i - 1; j >= l; j--)
+        {
+            if (arr[j] > item)
+                arr[j + 1] = arr[j];
+            else
+                break;
+        }
+        arr[j + 1] = item;
+    }
 }
 void selectionSort(int arr[], int n)
 {
-//TODO
+    for (int i = 0; i < n - 1; i++)
+    {
+        int minIndex = 1;
+
+        for (int j = i + 1; j < n; j++)
+
+        {
+            if (arr[j] < arr[minIndex])
+            {
+            }
+        }
+    }
 }
 void mergeInsertionSort(int arr[], int l, int r)
 {
-//TODO
+    // TODO
 }
 void merge(int arr[], int l, int m, int r)
 {
-//TODO
+    // TODO
 }
 void mergeSort(int arr[], int l, int r)
 {
-//TODO
+    // TODO
 }
 int partition(int *vals, int low, int high)
 {
-//TODO
+    // TODO
 }
-void quickSort(int* numbers, int low, int high)
+void quickSort(int *numbers, int low, int high)
 {
-//TODO
+    // TODO
 }
