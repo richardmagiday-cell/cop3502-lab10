@@ -101,8 +101,11 @@ void selectionSort(int arr[], int n)
         {
             if (arr[j] < arr[minIndex])
             {
+                minIndex = j;
             }
         }
+
+        swap(&arr[minIndex], &arr[i]);
     }
 }
 void mergeInsertionSort(int arr[], int l, int r)
@@ -119,9 +122,35 @@ void mergeSort(int arr[], int l, int r)
 }
 int partition(int *vals, int low, int high)
 {
-    // TODO
+    int pivot = low + rand() % (high - low + 1);
+
+    swap(&vals[low], &vals[pivot]);
+
+    int originalLowIndx = low;
+
+    low--;
+
+    while (low <= high)
+    {
+        while (low <= high && vals[low] <= vals[originalLowIndx])
+        {
+            low--;
+        }
+
+        while (high >= low && vals[high] > vals[originalLowIndx])
+        {
+            high--;
+        }
+    }
 }
 void quickSort(int *numbers, int low, int high)
 {
-    // TODO
+    if (low < high)
+    {
+        int magicIndex = partition(numbers, low, high);
+
+        quickSort(numbers, low, magicIndex + 1);
+
+        quickSort(numbers, magicIndex + 1, high);
+    }
 }
