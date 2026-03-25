@@ -29,7 +29,93 @@ void mergeInsertionSort(int arr[], int l, int r);
 
 int main()
 {
-    // TODO
+    srand(time(0));
+
+    int sizes[MAXARRAYS] = {10000, 20000, 30000, 40000, 50000, 100000};
+
+    int *originalArr, *sortedArr;
+
+    clock_t start, end;
+
+    long elapsed;
+
+    for (int i = 0; i < MAXARRAYS; i++)
+    {
+        printf("The current size is %d\n", sizes[i]);
+
+        originalArr = malloc(sizeof(int) * sizes[i]);
+
+        sortedArr = malloc(sizeof(int) * sizes[i]);
+
+        randArray(originalArr, sizes[i], MAXVALUE);
+
+        arrayCopy(originalArr, sortedArr, sizes);
+
+        start = clock();
+
+        bubbleSort(sortedArr, sizes[i]);
+
+        end = clock();
+
+        elapsed = timediff(start, end);
+
+        printf("\nSorting %d e;ements takes %ld milliseconds for bubbleSort\n", sizes[i], elapsed);
+
+        start = clock();
+
+        selectionSort(sortedArr, sizes[i]);
+
+        end = clock();
+
+        elapsed = timediff(start, end);
+
+        printf("\nSorting %d e;ements takes %ld milliseconds for slectionSort\n", sizes[i], elapsed);
+
+        start = clock();
+
+        insertionSort(sortedArr, 0, sizes[i] - 1);
+
+        end = clock();
+
+        elapsed = timediff(start, end);
+
+        printf("\nSorting %d e;ements takes %ld milliseconds for insertionSort\n", sizes[i], elapsed);
+
+        start = clock();
+
+        quickSort(sortedArr, 0, sizes[i] - 1);
+
+        end = clock();
+
+        elapsed = timediff(start, end);
+
+        printf("\nSorting %d e;ements takes %ld milliseconds for quickSort\n", sizes[i], elapsed);
+
+        start = clock();
+
+        mergeSort(sortedArr, 0, sizes[i] - 1);
+
+        end = clock();
+
+        elapsed = timediff(start, end);
+
+        printf("\nSorting %d e;ements takes %ld milliseconds for mergeSort\n", sizes[i], elapsed);
+
+        start = clock();
+
+        mergeInsertionSort(sortedArr, 0, sizes[i] - 1);
+
+        end = clock();
+
+        elapsed = timediff(start, end);
+
+        printf("\nSorting %d e;ements takes %ld milliseconds for mergeInsertionSort\n", sizes[i], elapsed);
+
+        free(originalArr);
+
+        free(sortedArr);
+    }
+
     return 0;
 }
 void arrayCopy(int original[], int copy[], int size)
@@ -110,7 +196,22 @@ void selectionSort(int arr[], int n)
 }
 void mergeInsertionSort(int arr[], int l, int r)
 {
-    // TODO
+    if (r - l + 1 <= 25)
+    {
+        insertionSort(arr, l, r);
+        return;
+    }
+
+    if (l < r)
+    {
+        int mid = (l + r) / 2;
+
+        mergeSort(arr, l, mid);
+
+        mergeSort(arr, mid + 1, l);
+
+        merge(arr, l, mid, r);
+    }
 }
 void merge(int arr[], int l, int m, int r)
 {
