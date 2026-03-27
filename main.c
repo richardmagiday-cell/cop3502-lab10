@@ -61,6 +61,8 @@ int main()
 
         printf("\nSorting %d e;ements takes %ld milliseconds for bubbleSort\n", sizes[i], elapsed);
 
+        arrayCopy(originalArr, sortedArr, sizes[i]);
+
         start = clock();
 
         selectionSort(sortedArr, sizes[i]);
@@ -70,6 +72,8 @@ int main()
         elapsed = timediff(start, end);
 
         printf("\nSorting %d e;ements takes %ld milliseconds for slectionSort\n", sizes[i], elapsed);
+
+        arrayCopy(originalArr, sortedArr, sizes[i]);
 
         start = clock();
 
@@ -81,6 +85,8 @@ int main()
 
         printf("\nSorting %d e;ements takes %ld milliseconds for insertionSort\n", sizes[i], elapsed);
 
+        arrayCopy(originalArr, sortedArr, sizes[i]);
+
         start = clock();
 
         quickSort(sortedArr, 0, sizes[i] - 1);
@@ -90,6 +96,8 @@ int main()
         elapsed = timediff(start, end);
 
         printf("\nSorting %d e;ements takes %ld milliseconds for quickSort\n", sizes[i], elapsed);
+
+        arrayCopy(originalArr, sortedArr, sizes[i]);
 
         start = clock();
 
@@ -101,6 +109,8 @@ int main()
 
         printf("\nSorting %d e;ements takes %ld milliseconds for mergeSort\n", sizes[i], elapsed);
 
+        arrayCopy(originalArr, sortedArr, sizes[i]);
+
         start = clock();
 
         mergeInsertionSort(sortedArr, 0, sizes[i] - 1);
@@ -110,6 +120,8 @@ int main()
         elapsed = timediff(start, end);
 
         printf("\nSorting %d e;ements takes %ld milliseconds for mergeInsertionSort\n", sizes[i], elapsed);
+
+        arrayCopy(originalArr, sortedArr, sizes[i]);
 
         free(originalArr);
 
