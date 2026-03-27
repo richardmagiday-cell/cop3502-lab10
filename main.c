@@ -192,7 +192,7 @@ void selectionSort(int arr[], int n)
 {
     for (int i = 0; i < n - 1; i++)
     {
-        int minIndex = 1;
+        int minIndex = i;
 
         for (int j = i + 1; j < n; j++)
 
@@ -217,18 +217,14 @@ void mergeInsertionSort(int arr[], int l, int r)
     if (l < r)
     {
         int mid = (l + r) / 2;
-
-        mergeSort(arr, l, mid);
-
-        mergeSort(arr, mid + 1, l);
-
+        mergeInsertionSort(arr, l, mid);
+        mergeInsertionSort(arr, mid + 1, r);
         merge(arr, l, mid, r);
     }
 }
 void merge(int arr[], int l, int m, int r)
 {
     int leftSize = m - l + 1;
-
     int rightSize = r - m;
 
     int *leftHelperarr = malloc(leftSize * sizeof(int));
@@ -236,54 +232,29 @@ void merge(int arr[], int l, int m, int r)
 
     int i, j, finalarrIndex;
 
+    for (i = 0; i < leftSize; i++)
+        leftHelperarr[i] = arr[l + i];
+
+    for (j = 0; j < rightSize; j++)
+        rightHelperarr[j] = arr[m + 1 + j];
+
     i = 0;
     j = 0;
     finalarrIndex = l;
 
-    for (i = 0; i < leftSize; i++)
+    while (i < leftSize && j < rightSize)
     {
-        leftHelperarr[i] = arr[l - i];
-    }
-
-    for (j = 0; j < rightSize; j++)
-    {
-        rightHelperarr[j] = arr[m + j + 1];
-    }
-
-    i = 0;
-    j = 0;
-
-    while (i < leftSize && j, rightSize)
-    {
-        if (leftHelperarr[i] <= rightHelperarr[i])
-        {
-            arr[finalarrIndex] = leftHelperarr[i];
-
-            i++;
-        }
+        if (leftHelperarr[i] <= rightHelperarr[j])
+            arr[finalarrIndex++] = leftHelperarr[i++];
         else
-        {
-            arr[finalarrIndex] = rightHelperarr[j];
-
-            j++;
-        }
-
-        finalarrIndex++;
+            arr[finalarrIndex++] = rightHelperarr[j++];
     }
 
     while (i < leftSize)
-    {
-        arr[finalarrIndex] = leftHelperarr[i];
-
-        i++;
-    }
+        arr[finalarrIndex++] = leftHelperarr[i++];
 
     while (j < rightSize)
-    {
-        arr[finalarrIndex] = rightHelperarr[j];
-
-        j++;
-    }
+        arr[finalarrIndex++] = rightHelperarr[j++];
 
     free(leftHelperarr);
     free(rightHelperarr);
@@ -293,54 +264,39 @@ void mergeSort(int arr[], int l, int r)
     if (l < r)
     {
         int mid = (l + r) / 2;
-
         mergeSort(arr, l, mid);
-
-        mergeSort(arr, mid + 1, l);
-
+        mergeSort(arr, mid + 1, r);
         merge(arr, l, mid, r);
     }
 }
 int partition(int *vals, int low, int high)
 {
-    int pivot = low + rand() % (high - low + 1);
+    int pivotIndex = low + rand() % (high - low + 1);
+    int pivotValue = vals[pivotIndex];
 
-    swap(&vals[low], &vals[pivot]);
+    swap(&vals[pivotIndex], &vals[high]);
 
-    int originalLowIndx = low;
+    int i = low - 1;
 
-    low--;
-
-    while (low <= high)
+    for (int j = low; j < high; j++)
     {
-        while (low <= high && vals[low] <= vals[originalLowIndx])
+        if (vals[j] <= pivotValue)
         {
-            low--;
-        }
-
-        while (high >= low && vals[high] > vals[originalLowIndx])
-        {
-            high--;
-        }
-
-        if (low < high)
-        {
-            swap(&vals[low], &vals[high]);
+            i++;
+            swap(&vals[i], &vals[j]);
         }
     }
 
-    swap(&vals[originalLowIndx], &vals[high]);
-
-    return high;
+    swap(&vals[i + 1], &vals[high]);
+    return i + 1;
 }
+
 void quickSort(int *numbers, int low, int high)
 {
     if (low < high)
     {
         int magicIndex = partition(numbers, low, high);
-
-        quickSort(numbers, low, magicIndex + 1);
-
+        quickSort(numbers, low, magicIndex - 1);
         quickSort(numbers, magicIndex + 1, high);
     }
 }
